@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    name: jaeger-operator
+    release: prometheus
+  name: jaeger-service-monitor
+  namespace: prometheus-system
+spec:
+  endpoints:
+  - interval: 15s
+    path: /metrics
+    port: http-metrics
+  namespaceSelector:
+    matchNames:
+    - "jaeger-system"
+  selector:
+    matchLabels:
+      name: jaeger-operator

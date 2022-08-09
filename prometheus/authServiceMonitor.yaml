@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: auth-service-monitor
+  namespace: prometheus-system
+  labels:
+    app: authentication
+    release: prometheus
+spec:
+    namespaceSelector:
+        matchNames:
+        - default
+    selector:
+        matchLabels:
+            app: authentication
+    endpoints:
+    - port: auth-port
+      path: '/actuator/prometheus'
+      interval: 15s

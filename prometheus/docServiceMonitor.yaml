@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: doc-service-monitor
+  namespace: prometheus-system
+  labels:
+    app: doc-service
+    release: prometheus
+spec:
+    namespaceSelector:
+        matchNames:
+        - default
+    selector:
+        matchLabels:
+            app: doc-service
+    endpoints:
+    - port: doc-port
+      path: '/actuator/prometheus'
+      interval: 15s

@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: sidecar-service-monitor
+  namespace: prometheus-system
+  labels:
+    security.istio.io/tlsMode: istio
+    release: prometheus
+spec:
+    namespaceSelector:
+        matchNames:
+        - default
+    selector:
+        matchLabels:
+            security.istio.io/tlsMode: istio
+    podMetricsEndpoints:
+    - port: http-envoy-prom
+      path: '/stats/prometheus'
+      interval: 15s
