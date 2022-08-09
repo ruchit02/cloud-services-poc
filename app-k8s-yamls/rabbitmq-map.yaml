@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: rabbitmq-env-vars
+data:
+    BROKER_HOST: rabbitmq-port-exposer
+    BROKER_PORT: "5672"

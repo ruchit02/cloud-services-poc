@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: doc-deploy
+  labels:
+    app: doc-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: doc-service
+  template:
+    metadata:
+      labels:
+        app: doc-service
+    spec:
+      containers:
+        - name: doc-cont
+          imagePullPolicy: IfNotPresent
+          image: t0pn0tch/photo-image
+          ports:
+            - name: doc-port
+              containerPort: 8082
+          env:
+            - name: MYSQL_DATABASE
+              value: employeedocumentdetails
+            - name: MYSQL_URL
+              value: jdbc:mysql://database-port-exposer:3306/employeedocumentdetails
+          envFrom:
+            - configMapRef:
+                name: mysql-env-vars
+            - configMapRef:
+                name: gateway-env-vars
+            - configMapRef:
+                name: rabbitmq-env-vars

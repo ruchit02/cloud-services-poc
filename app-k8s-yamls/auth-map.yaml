@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: auth-env-vars
+data:
+    AUTH_SERVICE_HOST: auth-port-exposer
+    AUTH_SERVICE_PORT: "8083"

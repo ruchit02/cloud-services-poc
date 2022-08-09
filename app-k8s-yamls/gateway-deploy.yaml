@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-deploy
+  labels:
+    app: gateway-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gateway-service
+  template:
+    metadata:
+      labels:
+        app: gateway-service
+    spec:
+      containers:
+        - name: gateway-cont
+          imagePullPolicy: IfNotPresent
+          image: t0pn0tch/gateway-image
+          ports:
+            - name: gateway-port
+              containerPort: 8081
+          envFrom:
+            - configMapRef:
+                name: rabbitmq-env-vars
+            - configMapRef:
+                name: auth-env-vars
+            - configMapRef:
+                name: doc-env-vars
+            

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq-deploy
+  labels:
+    app: mssg-broker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mssg-broker
+  template:
+    metadata:
+      labels:
+        app: mssg-broker
+    spec:
+      containers:
+        - name: mssg-broker-service
+          imagePullPolicy: IfNotPresent
+          image: rabbitmq:3.9.2-management
+          ports:
+            - name: rabbitmq-broker
+              containerPort: 5672
+            - name: broker-display
+              containerPort: 15672
