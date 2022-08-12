@@ -5,7 +5,7 @@ metadata:
   labels:
     app: mssg-broker
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: mssg-broker
   ports:
@@ -13,7 +13,9 @@ spec:
       protocol: TCP
       port: 5672
       targetPort: 5672
+      nodePort: 30001
     - name: management-port
       protocol: TCP
       port: 15672
       targetPort: 15672
+      nodePort: 30002
