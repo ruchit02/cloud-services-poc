@@ -1,0 +1,4 @@
+Execution Timeout error -> increase timeout
+lambda internet acess -> provide only private subnets to Lambda, create a NAT in public subnet, attach this NAT to private route table (0.0.0.0)
+increase memory to proportionally increase cpu -> faster execution
+only /tmp/ directory is writeable in lambda -> using any other directory may give you "this is a ReadOnly filesystem" error 
